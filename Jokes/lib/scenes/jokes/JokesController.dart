@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:jokes/scenes/jokes/JokesInteractor.dart';
 import 'package:jokes/scenes/jokes/JokesLocalization.dart';
@@ -116,7 +114,7 @@ class JokesControllerState extends State<JokesController>
 
   SizedBox setupCell(int index) {
     return SizedBox(
-        width: double.infinity, child: Center(child: Text('Text for $index')));
+        width: double.infinity, child: Center(child: Text(JokesLocalization.instance.sourceText('https://page$index.com'))));
   }
 
   Widget? setupListViewFooter() {

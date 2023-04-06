@@ -40,6 +40,9 @@ dependencies:
   json_annotation: ^4.8.0
   uuid: ^3.0.7
   http: ^0.13.5
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -60,7 +63,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -101,3 +104,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: Helvetica
+      fonts:
+        - asset: lib/resources/fonts/Helvetica-Bold.ttf
+        - asset: lib/resources/fonts/Helvetica-Light.ttf
+        - asset: lib/resources/fonts/Helvetica.ttf
+        - asset: lib/resources/fonts/Helvetica-BoldOblique.ttf
+        - asset: lib/resources/fonts/Helvetica-Oblique.ttf

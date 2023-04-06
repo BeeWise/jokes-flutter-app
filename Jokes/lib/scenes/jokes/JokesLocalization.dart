@@ -1,21 +1,34 @@
+import 'package:jokes/localization/LocalizationManager.dart';
+
 class JokesLocalization {
   JokesLocalization._privateConstructor();
-  static final JokesLocalization instance =
-      JokesLocalization._privateConstructor();
+  static final JokesLocalization instance = JokesLocalization._privateConstructor();
 
-  String title() {
-    return "Jokes";
+  jokeOfTheDayTitle() {
+    return LocalizationManager.instance.appLocalizations()?.jokesSceneJokeOfTheDayTitle ?? '';
   }
 
-  String signInTitle() {
-    return "Sign In";
+  jokeOfTheWeekTitle() {
+    return LocalizationManager.instance.appLocalizations()?.jokesSceneJokeOfTheWeekTitle ?? '';
   }
 
-  String usernameOrEmailPlaceholder() {
-    return "Username or email";
+  jokeOfTheMonthTitle() {
+    return LocalizationManager.instance.appLocalizations()?.jokesSceneJokeOfTheMonthTitle ?? '';
   }
 
-  String passwordPlaceholder() {
-    return "Password";
+  jokeOfTheYearTitle() {
+    return LocalizationManager.instance.appLocalizations()?.jokesSceneJokeOfTheYearTitle ?? '';
+  }
+
+  noMoreItemsText() {
+    return LocalizationManager.instance.appLocalizations()?.jokesSceneNoMoreItemsText ?? '';
+  }
+
+  errorText() {
+    return LocalizationManager.instance.appLocalizations()?.jokesSceneErrorText ?? '';
+  }
+
+  sourceText(source) {
+    return LocalizationManager.instance.appLocalizations()?.jokesSceneSourceText(source) ?? '';
   }
 }

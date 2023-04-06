@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:jokes/localization/LocalizationManager.dart';
+import 'package:jokes/managers/context/ContextManager.dart';
 import 'package:jokes/scenes/jokes/JokesController.dart';
 import 'package:jokes/style/ApplicationStyle.dart';
 import 'package:jokes/tasks/configurator/TaskConfigurator.dart';
@@ -22,7 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateTitle: (BuildContext context) => 'Jokes',
+      onGenerateTitle: (BuildContext context) => dotenv.get("APP_NAME"),
+      navigatorKey: ContextManager.instance.navigatorKey,
+      localizationsDelegates: LocalizationManager.instance.localizationsDelegates(),
+      supportedLocales: LocalizationManager.instance.supportedLocales(),
       theme: ThemeData(
         primaryColor: ApplicationStyle.colors.primary,
       ),
