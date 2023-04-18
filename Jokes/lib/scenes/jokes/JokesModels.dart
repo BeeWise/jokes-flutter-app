@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../../components/attributed_text/AttributedText.dart';
 import '../../operations/base/errors/OperationError.dart';
 
-class JokesModelsPaginationModel {
+class PaginationModel {
   bool isFetchingItems = false;
   bool noMoreItems = false;
   bool hasError = false;
@@ -13,9 +13,7 @@ class JokesModelsPaginationModel {
   int limit = 30;
 
   List<Joke> items = [];
-
-  Map<JokesModelsTopItemType, bool> isFetchingTopItems = {};
-  Map<JokesModelsTopItemType, Joke?> topItem = {};
+  List<Joke> readJokes = [];
 
   void reset() {
     this.isFetchingItems = false;
@@ -25,99 +23,98 @@ class JokesModelsPaginationModel {
     this.limit = 10;
     this.items = [];
 
-    this.isFetchingTopItems = {};
-    this.topItem = {};
+    this.readJokes = [];
   }
 }
 
-class JokesModelsTopItemType {
-  static JokesModelsTopItemType daily = JokesModelsTopItemType(0);
-  static JokesModelsTopItemType weekly = JokesModelsTopItemType(1);
-  static JokesModelsTopItemType monthly = JokesModelsTopItemType(2);
-  static JokesModelsTopItemType yearly = JokesModelsTopItemType(3);
-
-  static List<JokesModelsTopItemType> allCases = [
-    daily,
-    weekly,
-    monthly,
-    yearly
-  ];
-
-  int value;
-
-  JokesModelsTopItemType(this.value);
-
-  static JokesModelsTopItemType? from(int? value) {
-    if (value == null) {
-      return null;
-    }
-    return JokesModelsTopItemType(value);
-  }
-
-  JokesModelsTopItemType? nextType() {
-    if (this.value == JokesModelsTopItemType.daily.value) {
-      return JokesModelsTopItemType.weekly;
-    } else if (this.value == JokesModelsTopItemType.weekly) {
-      return JokesModelsTopItemType.monthly;
-    } else if (this.value == JokesModelsTopItemType.monthly) {
-      return JokesModelsTopItemType.yearly;
-    }
-    return null;
-  }
-}
-
-class JokesModelsTopItemModel {
-  JokesModelsTopItemType type;
-  Joke item;
-
-  JokesModelsTopItemModel(this.type, this.item);
-}
-
-enum JokesModelsItemType {
-  topJokeText,
-  topJokeQna,
+enum ItemType {
   jokeText,
   jokeQna,
-  shareApp,
-  pushNotifications,
   space,
 }
 
-class JokesModelsDisplayedItem {
+class DisplayedItem {
   String uuid = const Uuid().v4();
-  JokesModelsItemType type;
+  ItemType type;
   dynamic model;
 
-  JokesModelsDisplayedItem(this.type, this.model);
+  DisplayedItem(this.type, this.model);
 }
 
-class JokesModelsItemsPresentationResponse {
+class ItemsPresentationResponse {
   List<Joke> items;
-  JokesModelsTopItemModel? topItemModel;
+  List<Joke> readJokes;
 
-  JokesModelsItemsPresentationResponse(this.items, this.topItemModel);
+  ItemsPresentationResponse(this.items, this.readJokes);
 }
 
-class JokesModelsItemsPresentationViewModel {
-  List<JokesModelsDisplayedItem> items;
+class ItemsPresentationViewModel {
+  List<DisplayedItem> items;
 
-  JokesModelsItemsPresentationViewModel(this.items);
+  ItemsPresentationViewModel(this.items);
 }
 
-class JokesModelsErrorPresentationResponse {
+class ErrorPresentationResponse {
   OperationError error;
 
-  JokesModelsErrorPresentationResponse(this.error);
+  ErrorPresentationResponse(this.error);
 }
 
-class JokesModelsErrorPresentationViewModel {
+class ErrorPresentationViewModel {
   AttributedText errorText;
 
-  JokesModelsErrorPresentationViewModel(this.errorText);
+  ErrorPresentationViewModel(this.errorText);
 }
 
-class JokesModelsNoMoreItemsPresentationViewModel {
+class NoMoreItemsPresentationViewModel {
   AttributedText errorText;
 
-  JokesModelsNoMoreItemsPresentationViewModel(this.errorText);
+  NoMoreItemsPresentationViewModel(this.errorText);
+}
+
+class ActionAlertPresentationResponse {
+  OperationError error;
+
+  ActionAlertPresentationResponse(this.error);
+}
+
+class ActionAlertPresentationViewModel {
+  String? title;
+  String? message;
+
+  ActionAlertPresentationViewModel(this.title, this.message);
+}
+
+class ItemSelectionRequest {
+  String? id;
+
+  ItemSelectionRequest(this.id);
+}
+
+class ItemReadStateResponse {
+  bool isRead;
+  String? id;
+
+  ItemReadStateResponse(this.isRead, this.id);
+}
+
+class ItemReadStateViewModel {
+  bool isRead;
+  String? id;
+
+  ItemReadStateViewModel(this.isRead, this.id);
+}
+
+class ItemScrollResponse {
+  bool animated;
+  int index;
+
+  ItemScrollResponse(this.animated, this.index);
+}
+
+class ItemScrollViewModel {
+  Duration duration;
+  int index;
+
+  ItemScrollViewModel(this.duration, this.index);
 }

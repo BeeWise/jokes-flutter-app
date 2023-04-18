@@ -1,5 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:jokes/operations/base/errors/OperationError.dart';
-import 'package:jokes/scenes/jokes/JokesModels.dart';
+import 'package:jokes/scenes/jokes/JokesModels.dart' as JokesModels;
 import 'package:jokes/scenes/jokes/JokesPresenter.dart';
 import 'package:jokes/scenes/jokes/JokesWorker.dart';
 
@@ -7,16 +8,19 @@ import '../../models/joke/Joke.dart';
 
 abstract class JokesBusinessLogic {
   void shouldFetchJokes();
+
+  void shouldRefreshDetails();
+
+  void shouldSelectReadAnswer(JokesModels.ItemSelectionRequest request);
+
+  void shouldSelectLogo();
 }
 
-class JokesInteractor extends JokesBusinessLogic
-    implements JokesWorkerDelegate {
+class JokesInteractor extends JokesBusinessLogic implements JokesWorkerDelegate {
   JokesWorker? worker;
   JokesPresentationLogic? presenter;
 
-  JokesModelsPaginationModel paginationModel = JokesModelsPaginationModel();
-
-  bool isSigningIn = false;
+  JokesModels.PaginationModel paginationModel = JokesModels.PaginationModel();
 
   JokesInteractor() {
     this.worker = JokesWorker(this);
@@ -24,19 +28,17 @@ class JokesInteractor extends JokesBusinessLogic
 
   @override
   void shouldFetchJokes() {
-    if (!this.paginationModel.isFetchingItems &&
-        !this.paginationModel.noMoreItems) {
+    if (!this.paginationModel.isFetchingItems && !this.paginationModel.noMoreItems) {
       this.paginationModel.isFetchingItems = true;
       this.presenter?.presentLoadingState();
-      this.worker?.fetchJokes(this.paginationModel.currentPage,
-          this.paginationModel.limit, JokeOrderBy.latest.value);
+      this.worker?.fetchJokes(this.paginationModel.currentPage, this.paginationModel.limit, JokeOrderBy.latest.value);
     }
   }
 
   @override
   void successDidFetchJokes(List<Joke> jokes) {
     this.paginationModel.isFetchingItems = false;
-    this.paginationModel.items.addAll(jokes);
+    for (var element in jokes) { this.paginationModel.items.add(element); }
     this.paginationModel.currentPage += 1;
     this.paginationModel.hasError = false;
 
@@ -52,44 +54,26 @@ class JokesInteractor extends JokesBusinessLogic
     this.paginationModel.isFetchingItems = false;
     this.paginationModel.hasError = true;
     this.presenter?.presentNotLoadingState();
-    this.presenter?.presentError(JokesModelsErrorPresentationResponse(error));
+    this.presenter?.presentError(JokesModels.ErrorPresentationResponse(error));
   }
 
-  presentItems() {
-    this.presenter?.presentItems(JokesModelsItemsPresentationResponse(
-        this.itemsToPresent(), this.topItemToPresent()));
+  @override
+  void shouldRefreshDetails() {
+    this.paginationModel.reset();
+
+    this.presentItems();
+    this.presenter?.presentRemoveError();
+    this.presenter?.presentRemoveNoMoreItems();
+
+    this.shouldFetchJokes();
+  }
+
+  void presentItems() {
+    this.presenter?.presentItems(JokesModels.ItemsPresentationResponse(this.itemsToPresent(), this.paginationModel.readJokes));
   }
 
   List<Joke> itemsToPresent() {
-    List<JokesModelsTopItemType> types = JokesModelsTopItemType.allCases;
-    Joke? topItem;
-    for (var index = 0; index < types.length; index++) {
-      JokesModelsTopItemType type = types[index];
-      Joke? item = this.paginationModel.topItem[type];
-      if (this.paginationModel.topItem.containsKey(type) && item != null) {
-        topItem = item;
-      }
-    }
-    if (topItem != null) {
-      return this
-          .paginationModel
-          .items
-          .where((element) => element.uuid != topItem?.uuid)
-          .toList();
-    }
     return this.paginationModel.items;
-  }
-
-  JokesModelsTopItemModel? topItemToPresent() {
-    List<JokesModelsTopItemType> types = JokesModelsTopItemType.allCases;
-    for (var index = 0; index < types.length; index++) {
-      JokesModelsTopItemType type = types[index];
-      Joke? item = this.paginationModel.topItem[type];
-      if (this.paginationModel.topItem.containsKey(type) && item != null) {
-        return JokesModelsTopItemModel(type, item);
-      }
-    }
-    return null;
   }
 
   shouldVerifyNoMoreItems(int count) {
@@ -97,5 +81,26 @@ class JokesInteractor extends JokesBusinessLogic
       this.paginationModel.noMoreItems = true;
       this.presenter?.presentNoMoreItems();
     }
+  }
+
+  Joke? joke(String? id) {
+    if (id == null) {
+      return null;
+    }
+    return this.paginationModel.items.firstWhereOrNull((element) => element.uuid == id);
+  }
+
+  @override
+  void shouldSelectReadAnswer(JokesModels.ItemSelectionRequest request) {
+    final joke = this.joke(request.id);
+    if (joke != null) {
+      this.paginationModel.readJokes.add(joke);
+      this.presenter?.presentReadState(JokesModels.ItemReadStateResponse(true, joke.uuid));
+    }
+  }
+
+  @override
+  void shouldSelectLogo() {
+    this.presenter?.presentScrollToItem(JokesModels.ItemScrollResponse(false, 0));
   }
 }

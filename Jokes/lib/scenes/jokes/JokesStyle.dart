@@ -6,18 +6,18 @@ class JokesStyle {
   static final instance = JokesStyle();
 
   ContentViewModel contentViewModel = ContentViewModel();
-  UserAvatarView userAvatarViewModel = UserAvatarView();
+  UserAvatarViewModel userAvatarViewModel = UserAvatarViewModel();
   CellModel cellModel = CellModel();
   ListViewModel listViewModel = ListViewModel();
   JokeCellModel jokeCellModel = JokeCellModel();
 }
 
 class ContentViewModel {
-  Color backgroundColor = ApplicationStyle.colors.transparent;
+  Color backgroundColor = ApplicationStyle.colors.backgroundColor;
 }
 
-class UserAvatarView {
-  AssetImage placeholder = AssetImage(ApplicationStyle.images.userAvatarPlaceholderSmallImage);
+class UserAvatarViewModel {
+  String placeholder = ApplicationStyle.images.userAvatarPlaceholderSmallImage;
   double borderRadius = ApplicationConstraints.constant.x20;
   Color backgroundColor = ApplicationStyle.colors.transparent;
   Color borderColor = ApplicationStyle.colors.white.withAlpha(127);
@@ -31,7 +31,6 @@ class CellModel {
 }
 
 class ListViewModel {
-  Color backgroundColor = ApplicationStyle.colors.backgroundColor;
   Color activityIndicatorColor = ApplicationStyle.colors.primary;
 
   TextStyle noMoreItemsTextStyle = TextStyle(color: ApplicationStyle.colors.gray, fontFamily: ApplicationStyle.fonts.regular, fontSize: 14);
@@ -46,24 +45,25 @@ class JokeCellModel {
   Color avatarBorderColor = ApplicationStyle.colors.white.withAlpha(127);
   double avatarBorderWidth = ApplicationConstraints.constant.x1;
   double avatarMargin = ApplicationConstraints.constant.x0;
-  AssetImage avatarPlaceholder = AssetImage(ApplicationStyle.images.userAvatarPlaceholderSmallImage);
+  String avatarPlaceholder = ApplicationStyle.images.userAvatarPlaceholderSmallImage;
 
-  TextStyle nameStyle = TextStyle(color: ApplicationStyle.colors.primary, fontFamily: ApplicationStyle.fonts.bold, fontSize: 17);
+  TextStyle nameStyle = TextStyle(color: ApplicationStyle.colors.primary, fontFamily: ApplicationStyle.fonts.bold, fontSize: 17, fontWeight: FontWeight.bold);
   TextStyle usernameStyle = TextStyle(color: ApplicationStyle.colors.gray, fontFamily: ApplicationStyle.fonts.regular, fontSize: 14);
   TextStyle textStyle = TextStyle(color: ApplicationStyle.colors.primary, fontFamily: ApplicationStyle.fonts.regular, fontSize: 17);
   TextStyle answerStyle = TextStyle(color: ApplicationStyle.colors.primary, fontFamily: ApplicationStyle.fonts.regular, fontSize: 17);
+  TextStyle answerButtonStyle = TextStyle(color: ApplicationStyle.colors.white, fontFamily: ApplicationStyle.fonts.regular, fontSize: 17);
 
   Color likeCountActivityColor = ApplicationStyle.colors.gray;
-  AssetImage likeCountImage = AssetImage(ApplicationStyle.images.likeSmallImage);
+  String likeCountImage = ApplicationStyle.images.likeSmallImage;
   Color unselectedLikeCountBackgroundColor = ApplicationStyle.colors.transparent;
   Color unselectedLikeCountTintColor = ApplicationStyle.colors.gray;
   TextStyle unselectedLikeCountStyle = TextStyle(color: ApplicationStyle.colors.gray, fontFamily: ApplicationStyle.fonts.regular, fontSize: 16);
 
   Color dislikeCountActivityColor = ApplicationStyle.colors.primary;
-  AssetImage dislikeCountImage = AssetImage(ApplicationStyle.images.dislikeSmallImage);
+  String dislikeCountImage = ApplicationStyle.images.dislikeSmallImage;
   Color unselectedDislikeCountBackgroundColor = ApplicationStyle.colors.transparent;
   Color unselectedDislikeCountTintColor = ApplicationStyle.colors.gray;
   TextStyle unselectedDislikeCountStyle = TextStyle(color: ApplicationStyle.colors.gray, fontFamily: ApplicationStyle.fonts.regular, fontSize: 16);
 
-  TextStyle timeStyle = TextStyle(color: ApplicationStyle.colors.gray, fontFamily: ApplicationStyle.fonts.oblique, fontSize: 13);
+  TextStyle timeStyle = TextStyle(color: ApplicationStyle.colors.gray, fontFamily: ApplicationStyle.fonts.oblique, fontSize: 13, fontStyle: FontStyle.italic);
 }

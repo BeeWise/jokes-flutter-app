@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jokes/localization/LocalizationManager.dart';
 import 'package:jokes/managers/context/ContextManager.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
     return MaterialApp(
       onGenerateTitle: (BuildContext context) => dotenv.get("APP_NAME"),
       navigatorKey: ContextManager.instance.navigatorKey,
