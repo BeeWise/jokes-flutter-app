@@ -5,6 +5,7 @@ import 'package:jokes/components/views/LogoNavigationView.dart';
 import 'package:jokes/scenes/jokes/JokesInteractor.dart';
 import 'package:jokes/scenes/jokes/JokesModels.dart' as JokesModels;
 import 'package:jokes/scenes/jokes/JokesPresenter.dart';
+import 'package:jokes/scenes/jokes/JokesRouter.dart';
 import 'package:jokes/style/ApplicationConstraints.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -38,7 +39,6 @@ abstract class JokesDisplayLogic {
   void displayRemoveError();
 
   void displayReadState(JokesModels.ItemReadStateViewModel viewModel);
-  void displayErrorActionAlert(JokesModels.ActionAlertPresentationViewModel viewModel);
 
   void displayScrollToItem(JokesModels.ItemScrollViewModel viewModel);
 }
@@ -62,6 +62,7 @@ class JokesControllerModel {
 
 class JokesControllerState extends State<JokesController> implements JokesDisplayLogic, JokeTextCellDelegate, JokeQuestionAnswerCellDelegate, LogoNavigationViewDelegate {
   JokesBusinessLogic? interactor;
+  JokesRoutingLogic? router;
 
   JokesControllerModel model = JokesControllerModel();
   final ItemScrollController itemScrollController = ItemScrollController();
@@ -77,8 +78,11 @@ class JokesControllerState extends State<JokesController> implements JokesDispla
     final displayer = this;
     JokesPresentationLogic presenter = JokesPresenter(displayer);
     JokesInteractor interactor = JokesInteractor();
+    JokesRouter router = JokesRouter();
     interactor.presenter = presenter;
+    router.controller = this;
     this.interactor = interactor;
+    this.router = router;
   }
 
   @override
@@ -149,7 +153,7 @@ class JokesControllerState extends State<JokesController> implements JokesDispla
   }
 
   RefreshIndicator setupRefreshIndicator() {
-    return RefreshIndicator(child: this.setupListView(), onRefresh: () async { this.interactor?.shouldRefreshDetails(); });
+    return RefreshIndicator(color: JokesStyle.instance.listViewModel.activityIndicatorColor, child: this.setupListView(), onRefresh: () async { this.interactor?.shouldRefreshDetails(); });
   }
 
   ScrollablePositionedList setupListView() {
@@ -168,6 +172,9 @@ class JokesControllerState extends State<JokesController> implements JokesDispla
   }
 
   Widget setupCell(int index) {
+    if (this.model.displayedItems.isEmpty) {
+      return Container();
+    }
     final item = this.model.displayedItems[index];
     switch (item.type) {
       case JokesModels.ItemType.jokeText:
@@ -251,17 +258,17 @@ class JokesControllerState extends State<JokesController> implements JokesDispla
   }
 
   Widget setupActivityIndicator() {
-    return Container(margin: EdgeInsets.all(ApplicationConstraints.constant.x8), child: const Center(child: CircularProgressIndicator(color: Colors.black)));
+    return Container(margin: EdgeInsets.all(ApplicationConstraints.constant.x8), child: Center(child: CircularProgressIndicator(color: JokesStyle.instance.listViewModel.activityIndicatorColor)));
   }
 
   Widget setupErrorText() {
-    return Container(
+    return InkWell(onTap: () => this.interactor?.shouldFetchJokes(), child: Container(
         margin: EdgeInsets.all(ApplicationConstraints.constant.x8),
         child: Center(
             child: Text(this.model.errorText?.text ?? "",
                 textAlign: this.model.errorText?.align,
                 overflow: this.model.errorText?.overflow,
-                style: this.model.errorText?.style)));
+                style: this.model.errorText?.style))));
   }
 
   Widget setupNoMoreItemsText() {
@@ -341,11 +348,6 @@ class JokesControllerState extends State<JokesController> implements JokesDispla
       model.isRead = viewModel.isRead;
       model.cellInterface?.reload();
     }
-  }
-
-  @override
-  void displayErrorActionAlert(JokesModels.ActionAlertPresentationViewModel viewModel) {
-    // TODO: implement displayErrorActionAlert
   }
 
   @override

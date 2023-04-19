@@ -72,19 +72,6 @@ class NoMoreItemsPresentationViewModel {
   NoMoreItemsPresentationViewModel(this.errorText);
 }
 
-class ActionAlertPresentationResponse {
-  OperationError error;
-
-  ActionAlertPresentationResponse(this.error);
-}
-
-class ActionAlertPresentationViewModel {
-  String? title;
-  String? message;
-
-  ActionAlertPresentationViewModel(this.title, this.message);
-}
-
 class ItemSelectionRequest {
   String? id;
 

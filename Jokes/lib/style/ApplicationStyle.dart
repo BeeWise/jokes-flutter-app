@@ -17,7 +17,7 @@ class ApplicationFonts {
 class ApplicationColors {
   Color get white { return const Color(0xFFFFFFFF); }
   get black { return const Color(0xFF000000); }
-  get primary { return const Color(0xFF201D2E); }
+  Color get primary { return const Color(0xFF201D2E); }
   get secondary { return const Color(0xFFBC2753); }
   get lightPrimary { return const Color(0xFF6FE9ED); }
   get lightPrimaryShade15 { return const Color(0x6FE9ED4D); }

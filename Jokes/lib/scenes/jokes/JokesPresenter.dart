@@ -36,8 +36,6 @@ abstract class JokesPresentationLogic {
 
   void presentReadState(JokesModels.ItemReadStateResponse response);
 
-  void presentErrorActionAlert(JokesModels.ActionAlertPresentationResponse response);
-
   void presentScrollToItem(JokesModels.ItemScrollResponse response);
 }
 
@@ -88,12 +86,6 @@ class JokesPresenter extends JokesPresentationLogic {
   @override
   void presentReadState(JokesModels.ItemReadStateResponse response) {
     this.displayer?.displayReadState(JokesModels.ItemReadStateViewModel(response.isRead, response.id));
-  }
-
-  @override
-  void presentErrorActionAlert(JokesModels.ActionAlertPresentationResponse response) {
-    final message = response.error.localizedMessage();
-    this.displayer?.displayErrorActionAlert(JokesModels.ActionAlertPresentationViewModel(null, message));
   }
 
   @override
