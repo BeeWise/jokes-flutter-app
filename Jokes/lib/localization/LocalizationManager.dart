@@ -21,4 +21,8 @@ class LocalizationManager {
     }
     return AppLocalizations.of(context);
   }
+
+  String? currentLocale() {
+    return this.appLocalizations()?.localeName;
+  }
 }

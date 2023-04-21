@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:jokes/components/cells/joke/JokeQuestionAnswerCell.dart';
 import 'package:jokes/components/cells/joke/JokeTextCell.dart';
 import 'package:jokes/components/views/LogoNavigationView.dart';
@@ -13,6 +14,7 @@ import '../../components/attributed_text/AttributedText.dart';
 import '../../components/cells/space/SpaceCell.dart';
 import '../../components/views/LoadingImageView.dart';
 import '../../components/views/UserAvatarView.dart';
+import '../../localization/LocalizationManager.dart';
 import '../../models/image/CompoundImage.dart';
 import '../../style/ApplicationStyle.dart';
 import 'JokesStyle.dart' hide UserAvatarViewModel;
@@ -71,7 +73,15 @@ class JokesControllerState extends State<JokesController> implements JokesDispla
   void initState() {
     super.initState();
     this.setup();
+    this.shouldSetupLocale();
     this.interactor?.shouldFetchJokes();
+  }
+
+  void shouldSetupLocale() {
+    final locale = LocalizationManager.instance.currentLocale();
+    if (locale != null) {
+      Jiffy.setLocale(locale).then((value) {}, onError: (error) {});
+    }
   }
 
   void setup() {

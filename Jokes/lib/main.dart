@@ -12,11 +12,17 @@ void main() async {
   const envFileName = String.fromEnvironment("ENV_FILE_NAME");
   await dotenv.load(fileName: envFileName);
 
-  final environment = dotenv.get("ENVIRONMENT");
-  TaskConfigurator.instance.environment = TaskEnvironment.values
-      .firstWhere((element) => element.name == environment);
-
+  shouldSetupEnvironment();
   runApp(const MyApp());
+}
+
+void shouldSetupEnvironment() {
+  final environment = dotenv.get("ENVIRONMENT", fallback: 'none');
+  if (environment != 'none') {
+    TaskConfigurator.instance.environment = TaskEnvironment.values.firstWhere((element) => element.name == environment);
+  } else {
+    TaskConfigurator.instance.environment = TaskEnvironment.memory;
+  }
 }
 
 class MyApp extends StatelessWidget {

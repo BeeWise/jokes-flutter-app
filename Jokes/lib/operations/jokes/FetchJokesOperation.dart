@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:jokes/models/joke/Joke.dart';
 import 'package:jokes/operations/base/builders/EndpointsBuilder.dart';
@@ -108,9 +110,16 @@ class FetchJokesLocalOperation extends FetchJokesOperation {
       if (this.shouldFail) {
         this.noDataAvailableErrorBlock();
       } else {
-        final response = FetchJokesOperationModelsResponse();
-        this.successfulResultBlock(response);
+        this.parseJson();
       }
+    });
+  }
+
+  void parseJson() {
+    rootBundle.loadString('lib/resources/json/fetch_jokes_local_operation.json').then((value) {
+      final json = jsonDecode(value);
+      final response = FetchJokesOperationModelsResponse.fromJson(json);
+      this.successfulResultBlock(response);
     });
   }
 }
