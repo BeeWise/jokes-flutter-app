@@ -1,0 +1,61 @@
+{
+  "operationErrorUnknown": "Whoops! An error occurred... We're just kidding, please try again! 😂",
+
+  "operationErrorNoUrlAvailable": "Whoops! An error occurred... We're just kidding, please try again! 😂",
+  "operationErrorNoDataAvailable": "Whoops! An error occurred... We're just kidding, please try again! 😂",
+  "operationErrorCannotParseResponse": "Whoops! An error occurred... We're just kidding, please try again! 😂",
+  "operationErrorOperationCancelled": "Whoops! An error occurred... We're just kidding, please try again! 😂",
+  "operationErrorNoInternetConnection": "Whoops! You don't have Internet connection. Please try later!",
+
+  "cancelTitle": "Cancel",
+  "saveTitle": "Save",
+  "doneTitle": "Done",
+  "okTitle": "OK",
+
+  "jokesTitle": "Jokes",
+
+  "usernameTitle": "@{userName}",
+  "@usernameTitle": {
+    "description": "The username for a user",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "bob"
+      }
+    }
+  },
+
+  "iOSTitle": "iOS",
+  "androidTitle": "Android",
+
+  "jokeTypeTextTitle": "Text",
+  "jokeTypeQnaTitle": "Question & answer",
+
+  "jokeStatusPendingTitle": "Pending",
+  "jokeStatusApprovedTitle": "Approved",
+  "jokeStatusRejectedTitle": "Rejected",
+  "jokeStatusAdminRemovedTitle": "Removed by admin",
+  "jokeStatusOwnerRemovedTitle": "Removed",
+
+  "shareJokeTitle": "Share joke",
+  "shareJokeMessage": "Do you want to laugh? Read a good joke. 🤣",
+
+  "readAnswerTitle": "Read the answer",
+
+  "jokesSceneJokeOfTheDayTitle": "🔥Joke of the day",
+  "jokesSceneJokeOfTheWeekTitle": "🔥Joke of the week",
+  "jokesSceneJokeOfTheMonthTitle": "🔥Joke of the month",
+  "jokesSceneJokeOfTheYearTitle": "🔥Joke of the year",
+  "jokesSceneNoMoreItemsText": "No more jokes",
+  "jokesSceneErrorText": "An error occurred while fetching jokes. Refetch jokes ↺",
+  "jokesSceneSourceText": "Source: {source}",
+  "@jokesSceneSourceText": {
+    "description": "An url source",
+    "placeholders": {
+      "source": {
+        "type": "String",
+        "example": "https://iglume.ro"
+      }
+    }
+  }
+}

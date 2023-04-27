@@ -1,0 +1,61 @@
+{
+  "operationErrorUnknown": "Ups! A apărut o eroare... Doar glumim, te rog să încerci din nou! 😂",
+
+  "operationErrorNoUrlAvailable": "Ups! A apărut o eroare... Doar glumim, te rog să încerci din nou! 😂",
+  "operationErrorNoDataAvailable": "Ups! A apărut o eroare... Doar glumim, te rog să încerci din nou! 😂",
+  "operationErrorCannotParseResponse": "Ups! A apărut o eroare... Doar glumim, te rog să încerci din nou! 😂",
+  "operationErrorOperationCancelled": "Ups! A apărut o eroare... Doar glumim, te rog să încerci din nou! 😂",
+  "operationErrorNoInternetConnection": "Ups! Nu ai conexiune la Internet. Te rog să încerci mai târziu!",
+
+  "cancelTitle": "Anulează",
+  "saveTitle": "Salvează",
+  "doneTitle": "Done",
+  "okTitle": "OK",
+
+  "jokesTitle": "Glume",
+
+  "usernameTitle": "@{userName}",
+  "@usernameTitle": {
+    "description": "Username-ul unui utilizator",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "bob"
+      }
+    }
+  },
+
+  "iOSTitle": "iOS",
+  "androidTitle": "Android",
+
+  "jokeTypeTextTitle": "Text",
+  "jokeTypeQnaTitle": "Întrebare și răspuns",
+
+  "jokeStatusPendingTitle": "În așteptare",
+  "jokeStatusApprovedTitle": "Aprobat",
+  "jokeStatusRejectedTitle": "Refuzat",
+  "jokeStatusAdminRemovedTitle": "Eliminat de admin",
+  "jokeStatusOwnerRemovedTitle": "Eliminat",
+
+  "shareJokeTitle": "Distribuie gluma",
+  "shareJokeMessage": "Vrei să râzi? Citește o glumă bună. 🤣",
+
+  "readAnswerTitle": "Citește răspunsul",
+
+  "jokesSceneJokeOfTheDayTitle": "🔥Gluma zilei",
+  "jokesSceneJokeOfTheWeekTitle": "🔥Gluma săptămânii",
+  "jokesSceneJokeOfTheMonthTitle": "🔥Gluma lunii",
+  "jokesSceneJokeOfTheYearTitle": "🔥Gluma anului",
+  "jokesSceneNoMoreItemsText": "Nu mai sunt glume",
+  "jokesSceneErrorText": "A apărut o eroare. Reîncarcă glumele ↺",
+  "jokesSceneSourceText": "Sursă: {source}",
+  "@jokesSceneSourceText": {
+    "description": "Sursa url",
+    "placeholders": {
+      "source": {
+        "type": "String",
+        "example": "https://iglume.ro"
+      }
+    }
+  }
+}
