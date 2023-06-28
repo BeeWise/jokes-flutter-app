@@ -35,7 +35,7 @@ class JokeTask implements JokeTaskProtocol {
 
   JokeTask(this.environment);
 
-  OperationQueue fetchJokesOperationQueue = OperationQueue();
+  OperationQueue _fetchJokesOperationQueue = OperationQueue();
 
   @override
   void fetchJokes(JokeTaskModelsFetchJokesRequest model,
@@ -43,11 +43,11 @@ class JokeTask implements JokeTaskProtocol {
     final operationModel = FetchJokesOperationModelsRequest(
         model.page, model.limit, model.orderBy, model.startedAt, model.endedAt);
     final operation =
-        this.fetchJokesOperation(operationModel, completionHandler);
-    this.fetchJokesOperationQueue.addOperation(operation);
+        this._fetchJokesOperation(operationModel, completionHandler);
+    this._fetchJokesOperationQueue.addOperation(operation);
   }
 
-  AsynchronousOperation<FetchJokesOperationModelsResponse> fetchJokesOperation(
+  AsynchronousOperation<FetchJokesOperationModelsResponse> _fetchJokesOperation(
       FetchJokesOperationModelsRequest model,
       ResultInterface<JokeTaskModelsFetchJokesResponse> completionHandler) {
     ResultInterface<FetchJokesOperationModelsResponse>

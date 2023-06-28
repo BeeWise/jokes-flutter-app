@@ -1,5 +1,5 @@
-import 'package:jokes/tasks/joke/JokeTask.dart';
-import 'package:jokes/tasks/environment/TaskEnvironment.dart';
+import '../../tasks/joke/JokeTask.dart';
+import '../../tasks/environment/TaskEnvironment.dart';
 
 class TaskConfigurator {
   TaskConfigurator._privateConstructor();

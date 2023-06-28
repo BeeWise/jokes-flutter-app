@@ -1,4 +1,4 @@
-import 'package:jokes/localization/LocalizationManager.dart';
+import '../../../localization/LocalizationManager.dart';
 
 class OperationError {
   static final noUrlAvailable = OperationError('noUrlAvailable', null);
