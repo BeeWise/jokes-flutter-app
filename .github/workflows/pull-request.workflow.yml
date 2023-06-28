@@ -16,7 +16,14 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
-    - run: flutter --version
+    
+    - name: "Create .env file"
+      run: "echo '' > .env"
+      working-directory: Jokes
+
+    - name: "Create .env.dev file"
+      run: "echo '' > .env.dev"
+      working-directory: Jokes
 
     - name: "Install dependencies"
       run: "flutter pub get"
