@@ -1,4 +1,4 @@
-import 'package:jokes/operations/base/operations/Operation.dart';
+import '../../../operations/base/operations/Operation.dart';
 
 class OperationQueue {
   List<Operation> operations = List.empty(growable: true);

@@ -1,4 +1,4 @@
-import 'package:jokes/operations/base/errors/OperationError.dart';
+import '../../../operations/base/errors/OperationError.dart';
 import 'package:uuid/uuid.dart';
 
 class Operation {
