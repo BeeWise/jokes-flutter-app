@@ -1,4 +1,4 @@
-import 'package:jokes/tasks/environment/TaskEnvironment.dart';
+import '../../tasks/environment/TaskEnvironment.dart';
 
 abstract class TaskProtocol {
   TaskEnvironment environment;

@@ -1,0 +1,34 @@
+name: "Run tests"
+on: 
+  pull_request:
+    branches: ['master', 'develop']
+
+jobs:
+  tests:
+    name: "Unit tests"
+    runs-on: macOS-latest
+
+    timeout-minutes: 60
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+    
+    - name: "Create .env file"
+      run: "echo '' > .env"
+      working-directory: Jokes
+
+    - name: "Create .env.dev file"
+      run: "echo '' > .env.dev"
+      working-directory: Jokes
+
+    - name: "Install dependencies"
+      run: "flutter pub get"
+      working-directory: Jokes
+
+    - name: "Run tests"
+      run: "flutter test"
+      working-directory: Jokes

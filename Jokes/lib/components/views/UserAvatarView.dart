@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jokes/components/views/LoadingImageView.dart';
+import '../../components/views/LoadingImageView.dart';
 import '../../style/ApplicationConstraints.dart';
 
 class UserAvatarViewModel {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jokes/models/image/CompoundImage.dart';
+import '../../models/image/CompoundImage.dart';
 
 class LoadingImageViewModel {
   double? borderTopRightRadius;

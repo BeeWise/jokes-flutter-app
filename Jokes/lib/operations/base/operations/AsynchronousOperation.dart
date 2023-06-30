@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:jokes/operations/base/errors/OperationError.dart';
-import 'package:jokes/operations/base/operations/Operation.dart';
-import 'package:jokes/operations/base/operations/OperationStatusCode.dart';
+import '../../../operations/base/errors/OperationError.dart';
+import '../../../operations/base/operations/Operation.dart';
+import '../../../operations/base/operations/OperationStatusCode.dart';
 
 abstract class AsynchronousOperationInterface<T> {
   Future<Response> request();
